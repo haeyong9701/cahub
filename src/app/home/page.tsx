@@ -5,14 +5,24 @@ import { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-q
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
 
+interface BasicUserInfo {
+  user_name: string;
+  user_date_create: string;
+  user_date_last_login: string;
+  user_date_last_logout: string;
+  user_exp: number;
+  user_level: number;
+}
+
 const queryClient = new QueryClient();
 
 // 실제 데이터를 패칭하고 보여주는 컴포넌트
 function OuidDisplay() {
   const [userName, setUserName] = useState<string>("");
-  const [ouid, setOuid] = useState<string>("");
+  const [, setOuid] = useState<string>("");
+  const [basicInfo, setBasicInfo] = useState<BasicUserInfo | null>(null);
 
-  // API 호출 함수
+  // ouid 조회 API
   const fetchOuid = async (): Promise<string> => {
     const response = await axios.get("https://open.api.nexon.com/ca/v1/id", {
       headers: {
@@ -26,11 +36,28 @@ function OuidDisplay() {
     return response.data.ouid;
   };
 
+  // 기본 정보 조회 API
+  const fetchBasicInfo = async (ouid: string): Promise<BasicUserInfo> => {
+    const response = await axios.get("https://open.api.nexon.com/ca/v1/user/basic", {
+      headers: {
+        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      },
+      params: {
+        ouid,
+      },
+    });
+    return response.data;
+  };
+
   // useMutation을 사용해 버튼 클릭 시만 API 호출
   const mutation = useMutation({
     mutationFn: fetchOuid,
-    onSuccess: (data) => {
-      setOuid(data);
+    onSuccess: (ouid) => {
+      setOuid(ouid);
+      fetchBasicInfo(ouid).then((info) => {
+        setBasicInfo(info);
+        console.log("Basic Info:", info);
+      });
     },
   });
 
@@ -50,7 +77,18 @@ function OuidDisplay() {
       <button onClick={() => mutation.mutate()} style={{ padding: "10px" }}>
         조회
       </button>
-      {ouid && <p>ouid: {ouid}</p>}
+      {/* {ouid && <p>ouid: {ouid}</p>} */}
+      {basicInfo && (
+        <div>
+          <h2>기본 정보</h2>
+          <p>닉네임: {basicInfo.user_name}</p>
+          <p>가입일: {basicInfo.user_date_create}</p>
+          <p>최근 로그인: {basicInfo.user_date_last_login}</p>
+          <p>최근 로그아웃: {basicInfo.user_date_last_logout}</p>
+          <p>경험치: {basicInfo.user_exp}</p>
+          <p>레벨: {basicInfo.user_level}</p>
+        </div>
+      )}
     </div>
   );
 }
