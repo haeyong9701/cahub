@@ -14,6 +14,15 @@ interface BasicUserInfo {
   user_level: number;
 }
 
+interface ItemEquipment {
+  item_equipment_slot_name: string;
+  item_name: string;
+}
+
+interface ItemEquipmentResponse {
+  item_equipment: ItemEquipment[];
+}
+
 const queryClient = new QueryClient();
 
 // 실제 데이터를 패칭하고 보여주는 컴포넌트
@@ -21,6 +30,7 @@ function OuidDisplay() {
   const [userName, setUserName] = useState<string>("");
   const [, setOuid] = useState<string>("");
   const [basicInfo, setBasicInfo] = useState<BasicUserInfo | null>(null);
+  const [itemEquipment, setItemEquipment] = useState<ItemEquipmentResponse | null>(null);
 
   // ouid 조회 API
   const fetchOuid = async (): Promise<string> => {
@@ -49,6 +59,19 @@ function OuidDisplay() {
     return response.data;
   };
 
+  // 장착 아이템 정보 조회 API
+  const fetchItemEquipment = async (ouid: string): Promise<ItemEquipmentResponse> => {
+    const response = await axios.get("https://open.api.nexon.com/ca/v1/user/item-equipment", {
+      headers: {
+        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      },
+      params: {
+        ouid,
+      },
+    });
+    return response.data;
+  };
+
   // useMutation을 사용해 버튼 클릭 시만 API 호출
   const mutation = useMutation({
     mutationFn: fetchOuid,
@@ -56,7 +79,10 @@ function OuidDisplay() {
       setOuid(ouid);
       fetchBasicInfo(ouid).then((info) => {
         setBasicInfo(info);
-        console.log("Basic Info:", info);
+      });
+      fetchItemEquipment(ouid).then((item) => {
+        setItemEquipment(item);
+        console.log("장착 아이템 정보:", item);
       });
     },
   });
@@ -87,6 +113,27 @@ function OuidDisplay() {
           <p>최근 로그아웃: {basicInfo.user_date_last_logout}</p>
           <p>경험치: {basicInfo.user_exp}</p>
           <p>레벨: {basicInfo.user_level}</p>
+        </div>
+      )}
+      {itemEquipment && (
+        <div>
+          <h2>장착 아이템</h2>
+          {itemEquipment.item_equipment.map(({ item_equipment_slot_name, item_name }, index) => {
+            if (
+              !item_equipment_slot_name ||
+              item_equipment_slot_name === "(Unknown)" ||
+              !item_name ||
+              item_name === "(Unknown)"
+            ) {
+              return null;
+            }
+            return (
+              <div key={index} style={{ marginBottom: "10px" }}>
+                <p>슬롯: {item_equipment_slot_name}</p>
+                <p>아이템 이름: {item_name}</p>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
