@@ -1,16 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useMutation } from "@tanstack/react-query";
 import { BasicUserInfo, ItemEquipmentResponse } from "@/app/_type";
 import { fetchOuid, fetchBasicInfo, fetchItemEquipment } from "@/app/_api";
 import { ItemImage } from "@/app/_components/ItemImage";
 
-const queryClient = new QueryClient();
-
-// 실제 데이터를 패칭하고 보여주는 컴포넌트
-function OuidDisplay() {
+export default function SearchPage() {
   const [userName, setUserName] = useState<string>("");
   const [, setOuid] = useState<string>("");
   const [basicInfo, setBasicInfo] = useState<BasicUserInfo | null>(null);
@@ -73,14 +69,5 @@ function OuidDisplay() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function CaIdPage() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <OuidDisplay />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
   );
 }
