@@ -1,61 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { QueryClient, QueryClientProvider, useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import axios from "axios";
-import Image from "next/image";
-
-interface BasicUserInfo {
-  user_name: string;
-  user_date_create: Date;
-  user_date_last_login: Date;
-  user_date_last_logout: Date;
-  user_exp: number;
-  user_level: number;
-}
-
-interface ItemEquipment {
-  item_equipment_slot_name: string;
-  item_name: string;
-}
-
-interface ItemEquipmentResponse {
-  item_equipment: ItemEquipment[];
-}
-
-interface ManifestEntry {
-  item_name: string;
-  item_src: string;
-}
+import { BasicUserInfo, ItemEquipmentResponse } from "@/app/_type";
+import { fetchOuid, fetchBasicInfo, fetchItemEquipment } from "@/app/_api";
+import { ItemImage } from "@/app/_components/ItemImage";
 
 const queryClient = new QueryClient();
-
-function normalizeKey(s: string) {
-  return s.trim().normalize("NFC");
-}
-
-function useManifest(filteredName: string) {
-  return useQuery<ManifestEntry[]>({
-    queryKey: ["image-manifest", filteredName],
-    queryFn: () => axios.get<ManifestEntry[]>("/data/image-manifest.json").then((res) => res.data),
-    staleTime: Infinity,
-    select: (data) => {
-      const filtered = data.filter((entry) => normalizeKey(entry.item_name) === normalizeKey(filteredName));
-      return filtered;
-    },
-  });
-}
-
-// 2) ItemImage 컴포넌트: 각 아이템 이름당 한 번 훅 호출
-function ItemImage({ itemName }: { itemName: string }) {
-  const { data, isPending, isError } = useManifest(itemName);
-
-  if (isPending) return <p>이미지 로딩…</p>;
-  if (isError) return <p style={{ color: "red" }}>이미지 없음</p>;
-
-  return <Image src={data[0]?.item_src} alt={itemName} width={60} height={60} style={{ objectFit: "contain" }} />;
-}
 
 // 실제 데이터를 패칭하고 보여주는 컴포넌트
 function OuidDisplay() {
@@ -64,49 +16,9 @@ function OuidDisplay() {
   const [basicInfo, setBasicInfo] = useState<BasicUserInfo | null>(null);
   const [itemEquipment, setItemEquipment] = useState<ItemEquipmentResponse | null>(null);
 
-  // ouid 조회 API
-  const fetchOuid = async (): Promise<string> => {
-    const response = await axios.get("https://open.api.nexon.com/ca/v1/id", {
-      headers: {
-        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
-      },
-      params: {
-        user_name: userName,
-        world_name: "해피",
-      },
-    });
-    return response.data.ouid;
-  };
-
-  // 기본 정보 조회 API
-  const fetchBasicInfo = async (ouid: string): Promise<BasicUserInfo> => {
-    const response = await axios.get("https://open.api.nexon.com/ca/v1/user/basic", {
-      headers: {
-        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
-      },
-      params: {
-        ouid,
-      },
-    });
-    return response.data;
-  };
-
-  // 장착 아이템 정보 조회 API
-  const fetchItemEquipment = async (ouid: string): Promise<ItemEquipmentResponse> => {
-    const response = await axios.get("https://open.api.nexon.com/ca/v1/user/item-equipment", {
-      headers: {
-        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
-      },
-      params: {
-        ouid,
-      },
-    });
-    return response.data;
-  };
-
   // useMutation을 사용해 버튼 클릭 시만 API 호출
   const mutation = useMutation({
-    mutationFn: fetchOuid,
+    mutationFn: () => fetchOuid(userName),
     onSuccess: async (ouid) => {
       setOuid(ouid);
       setBasicInfo(await fetchBasicInfo(ouid));
