@@ -5,17 +5,26 @@ const API_URL = "https://open.api.nexon.com/ca/v1";
 
 // ouid 조회 API
 const WORLD_NAME = "해피";
+// TODO API ERROR 처리, react-query로 어떻게 해야할지 고민
 export const fetchOuid = async (userName: string): Promise<string> => {
-  const response = await axios.get(`${API_URL}/id`, {
-    headers: {
-      "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
-    },
-    params: {
-      user_name: userName,
-      world_name: WORLD_NAME,
-    },
-  });
-  return response.data.ouid;
+  try {
+    const response = await axios.get(`${API_URL}/id`, {
+      headers: {
+        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      },
+      params: {
+        user_name: userName,
+        world_name: WORLD_NAME,
+      },
+    });
+    return response.data.ouid;
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      console.error("[fetchOuid] status:", err.response?.status, "data:", err.response?.data);
+      throw new Error(err.response?.data?.message || `OUID 조회 실패 (status ${err.response?.status})`);
+    }
+    throw new Error("An unexpected error occurred");
+  }
 };
 
 // 기본 정보 조회 API
