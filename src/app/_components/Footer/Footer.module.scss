@@ -1,0 +1,11 @@
+@use "@/app/_styles/font-size" as fs;
+@use "@/app/_styles/colors" as c;
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: c.$Gray-4;
+  font-size: fs.$font-size-xs;
+  padding: 0 2rem;
+}

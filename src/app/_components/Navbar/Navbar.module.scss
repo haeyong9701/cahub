@@ -1,0 +1,26 @@
+@use "@/app/_styles/font-size" as fs;
+@use "@/app/_styles/colors" as c;
+
+.header {
+  padding: 1.4rem;
+  background-color: c.$Background-1;
+}
+
+.header-link {
+  display: flex;
+  align-items: end;
+  width: 12rem;
+}
+
+.end-link {
+  color: c.$Gray-1;
+  font-size: fs.$font-size-sm;
+  padding-left: 0.5rem;
+  font-weight: 800;
+}
+
+.logo-wrapper {
+  position: relative;
+  aspect-ratio: 640 / 161;
+  width: 100%;
+}

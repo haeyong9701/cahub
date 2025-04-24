@@ -1,0 +1,19 @@
+@use "@/app/_styles/font-size" as fs;
+@use "@/app/_styles/colors" as c;
+
+.search-form {
+  position: relative;
+}
+
+.search-input {
+  width: 24rem;
+  height: 4.5rem;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: c.$Background-1;
+  color: c.$Gray-1;
+  font-size: fs.$font-size-sm;
+  font-weight: 500;
+  outline: none;
+}

@@ -1,0 +1,36 @@
+@use "../_styles/font-size" as fs;
+@use "../_styles/colors" as c;
+
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: c.$Background-1;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo-wrapper {
+  position: relative;
+  aspect-ratio: 640 / 161;
+  width: 15rem;
+  margin-bottom: 1.2rem;
+}
+
+.description {
+  color: c.$Gray-1;
+  font-size: fs.$font-size-xs;
+  padding-bottom: 2.5rem;
+}

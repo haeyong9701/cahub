@@ -1,0 +1,17 @@
+@use "@/app/_styles/font-size" as fs;
+@use "@/app/_styles/colors" as c;
+
+.search-button {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  transform: translate(0, -45%);
+  border: none;
+  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+}
+
+.search-icon-wrapper {
+  cursor: pointer;
+}
