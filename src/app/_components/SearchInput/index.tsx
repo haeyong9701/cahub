@@ -23,6 +23,7 @@ export default function SearchInput() {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         className={styles["search-input"]}
+        autoFocus
       />
       <SearchButton />
     </form>

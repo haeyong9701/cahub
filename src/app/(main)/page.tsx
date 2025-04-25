@@ -13,7 +13,7 @@ export default function MainPage() {
           <Image src="/images/logo.png" alt="CAHUB" fill />
         </div>
         <div className={styles["description"]}>
-          <p>캐릭터 정보를 조회할 수 있는 서비스</p>
+          <p>크레이지아케이드 캐릭터 정보 검색</p>
         </div>
         <SearchInput />
       </section>

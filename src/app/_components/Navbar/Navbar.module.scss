@@ -2,6 +2,9 @@
 @use "@/app/_styles/colors" as c;
 
 .header {
+  height: 6rem;
+  display: flex;
+  align-items: center;
   padding: 1.4rem;
   background-color: c.$Background-1;
 }

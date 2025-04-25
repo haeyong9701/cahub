@@ -7,7 +7,7 @@ export default function SearchButton() {
   return (
     <button type="submit" className={styles["search-button"]}>
       <div className={styles["search-icon-wrapper"]}>
-        <Image src="/images/search.svg" alt="search" width={15} height={15} />
+        <Image src="/images/search.svg" alt="search" width={17} height={17} />
       </div>
     </button>
   );
