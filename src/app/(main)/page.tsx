@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./mainPage.module.scss";
+import styles from "./MainPage.module.scss";
 import SearchInput from "../_components/SearchInput";
-import Footer from "../_components/Footer";
 
 export default function MainPage() {
   return (
@@ -17,7 +16,6 @@ export default function MainPage() {
         </div>
         <SearchInput />
       </section>
-      <Footer />
     </div>
   );
 }

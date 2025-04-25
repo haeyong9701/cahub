@@ -1,0 +1,9 @@
+@use "@/app/_styles/font-size" as fs;
+@use "@/app/_styles/colors" as c;
+
+.user-info {
+  background-color: c.$Background-2;
+  width: 100%;
+  height: 30vh;
+  color: c.$Gray-1;
+}
