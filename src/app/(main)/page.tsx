@@ -10,7 +10,7 @@ export default function MainPage() {
     <div className={styles["main-page-container"]}>
       <section className={styles["search-section"]}>
         <div className={styles["logo-wrapper"]}>
-          <Image src="/images/logo.png" alt="CAHUB" fill />
+          <Image src="/images/logo.png" alt="CAHUB" fill sizes="(min-width: 768px) 25rem, 15rem" />
         </div>
         <div className={styles["description"]}>
           <p>크레이지아케이드 캐릭터 정보 검색</p>

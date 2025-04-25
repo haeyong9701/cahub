@@ -8,7 +8,8 @@ export function ItemImage({ itemName }: { itemName: string }) {
   const { data, isPending, isError } = useManifest(itemName);
 
   if (isPending) return <p>이미지 로딩…</p>;
-  if (isError) return <p style={{ color: "red" }}>이미지 없음</p>;
+  if (isError) return <p style={{ color: "red" }}>이미지 로딩 실패</p>;
+  if (!data || data.length === 0) return <p>아이템 이미지 없음</p>;
 
-  return <Image src={data[0]?.item_src} alt={itemName} width={60} height={60} style={{ objectFit: "contain" }} />;
+  return <Image src={data[0].item_src} alt={itemName} width={60} height={60} style={{ objectFit: "contain" }} />;
 }
