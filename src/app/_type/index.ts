@@ -20,3 +20,9 @@ export interface ManifestEntry {
   item_name: string;
   item_src: string;
 }
+
+export interface LevelInfo {
+  level: number;
+  requiredExp: number;
+  totalExp: number;
+}

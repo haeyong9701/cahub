@@ -3,12 +3,18 @@
 import { BasicUserInfo } from "@/app/_type";
 import Image from "next/image";
 import styles from "./UserInfo.module.scss";
-import { formatDate } from "@/app/_lib";
+import { formatDate } from "@/app/_utils/formatDate";
+import { getNextLevelInfo } from "@/app/_utils/getNextLevelInfo";
 
 export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUserInfo; userName: string }) {
   const lastLogin = formatDate(basicInfo.user_date_last_login);
   const lastLogout = formatDate(basicInfo.user_date_last_logout);
-  const isOnline = lastLogin > lastLogout;
+  const isOnline = lastLogin >= lastLogout;
+
+  const { user_level, user_exp } = basicInfo;
+  const next = getNextLevelInfo(user_level);
+  const nextTotalExp = next ? next.totalExp : user_exp;
+  const expProgresRatio = ((user_exp / nextTotalExp) * 100).toFixed(1);
 
   return (
     <section className={styles["user-info-container"]}>
@@ -36,7 +42,11 @@ export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUser
 
               <div className={styles["user-info-exp"]}>
                 <dt>경험치</dt>
-                <dd className="exp">{basicInfo.user_exp}</dd>
+                <progress className={styles["exp-progress-bar"]} max={nextTotalExp} value={user_exp} />
+                <dd className={styles["exp-progress-ratio"]}>{expProgresRatio}%</dd>
+                <dd className={styles["exp"]}>
+                  {user_exp.toLocaleString()} / {nextTotalExp.toLocaleString()}
+                </dd>
               </div>
             </div>
 

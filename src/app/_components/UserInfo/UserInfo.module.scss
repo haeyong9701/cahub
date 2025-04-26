@@ -102,13 +102,39 @@
 
 .user-info-description {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 8rem auto;
 }
 
 .user-info-description > div {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.user-info-exp {
+  position: relative;
+  width: 14rem;
+}
+
+.exp-progress-bar {
+  width: 100%;
+  height: 1.5rem;
+  appearance: none;
+
+  &::-webkit-progress-bar {
+    background: c.$Gray-6;
+    border-radius: 0.25rem;
+  }
+  &::-webkit-progress-value {
+    background: c.$Green-1;
+    border-radius: 0.25rem;
+  }
+}
+
+.exp-progress-ratio {
+  position: absolute;
+  top: 2.1rem;
+  left: 6rem;
 }
 
 .user-info-time-stamp {
