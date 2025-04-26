@@ -1,5 +1,9 @@
 @use "../../_styles/colors" as c;
 
 .search-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: c.$Background-1;
+  min-height: 100vh;
 }

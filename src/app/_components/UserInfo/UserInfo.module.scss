@@ -1,9 +1,121 @@
 @use "@/app/_styles/font-size" as fs;
 @use "@/app/_styles/colors" as c;
 
-.user-info {
-  background-color: c.$Background-2;
+.user-info-container {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  height: 30vh;
+  height: 40vh;
+  background-color: c.$Background-2;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.image-wrapper {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  transform: translate(0%, 10%);
+  width: 15rem;
+  aspect-ratio: 3 / 5;
+  opacity: 0.1;
+  z-index: -1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 400%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.4) 0%, rgba(255, 255, 200, 0.1) 30%, transparent 60%);
+    z-index: -2;
+  }
+}
+
+.user-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 15%;
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    color: c.$Gray-1;
+    font-size: fs.$font-size-xs;
+  }
+
+  dt {
+    color: c.$Gray-4;
+  }
+}
+
+.user-info-name-and-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 8rem;
+  height: 2.4rem;
+  border-radius: 2rem;
+  background-color: rgba(c.$Gray-1, 0.1);
+}
+
+.status-circle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  &.online {
+    background-color: c.$Green-1;
+  }
+  &.offline {
+    background-color: c.$Gray-5;
+  }
+}
+
+.user-info-status > .online-text {
+  color: c.$Green-1;
+  font-size: fs.$font-size-xs;
+}
+
+.user-info-status > .offline-text {
+  color: c.$Gray-5;
+  font-size: fs.$font-size-xs;
+}
+
+.user-name {
+  font-size: fs.$font-size-lg;
   color: c.$Gray-1;
+}
+
+.user-info-description {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.user-info-description > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user-info-time-stamp {
+  display: flex;
+  gap: 1rem;
+
+  & > dt {
+    width: 7rem;
+  }
 }
