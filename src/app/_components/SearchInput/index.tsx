@@ -5,18 +5,18 @@ import { useRouter } from "next/navigation";
 import styles from "./SearchInput.module.scss";
 import SearchButton from "../SearchButton";
 
-export default function SearchInput() {
+export default function SearchInput({ className }: { className?: string }) {
   const [userName, setUserName] = useState<string>("");
   const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userName) return;
-    router.push(`search/${userName}`);
+    router.push(`/search/${userName}`);
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles["search-form"]}>
+    <form onSubmit={onSubmit} className={`${styles["search-form"]} ${className}`}>
       <input
         type="text"
         placeholder="캐릭터 닉네임을 입력하세요."
