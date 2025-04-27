@@ -9,7 +9,3 @@ const options: Intl.DateTimeFormatOptions = {
 export const formatDateKoreanMinute = function (date: Date): string {
   return new Date(date).toLocaleString("ko-KR", options);
 };
-
-export const formatDateKoreanSecond = function (date: Date): string {
-  return new Date(date).toLocaleString("ko-KR");
-};

@@ -3,7 +3,7 @@
 import { BasicUserInfo, GuildResponse } from "@/app/_type";
 import Image from "next/image";
 import styles from "./UserInfo.module.scss";
-import { formatDateKoreanMinute, formatDateKoreanSecond } from "@/app/_utils/formatDateKorean";
+import { formatDateKoreanMinute } from "@/app/_utils/formatDateKorean";
 import { getNextLevelInfo } from "@/app/_utils/getNextLevelInfo";
 
 export default function UserInfo({
@@ -15,8 +15,8 @@ export default function UserInfo({
   userName: string;
   guild: GuildResponse;
 }) {
-  const lastLogin = formatDateKoreanSecond(basicInfo.user_date_last_login);
-  const lastLogout = formatDateKoreanSecond(basicInfo.user_date_last_logout);
+  const lastLogin = new Date(basicInfo.user_date_last_login);
+  const lastLogout = new Date(basicInfo.user_date_last_logout);
   const isOnline = lastLogin >= lastLogout;
 
   const { user_level, user_exp } = basicInfo;
