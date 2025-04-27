@@ -2,7 +2,7 @@
 @use "@/app/_styles/colors" as c;
 
 .header {
-  height: 6rem;
+  height: 5rem;
   display: flex;
   align-items: center;
   padding: 1.4rem;
@@ -15,15 +15,8 @@
   width: 12rem;
 }
 
-.end-link {
-  color: c.$Gray-1;
-  font-size: fs.$font-size-sm;
-  padding-left: 0.5rem;
-  font-weight: 800;
-}
-
 .logo-wrapper {
   position: relative;
-  aspect-ratio: 640 / 161;
-  width: 9rem;
+  aspect-ratio: 888 / 131;
+  width: 12rem;
 }

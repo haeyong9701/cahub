@@ -19,7 +19,7 @@ export default function SearchInput({ className }: { className?: string }) {
     <form onSubmit={onSubmit} className={`${styles["search-form"]} ${className}`}>
       <input
         type="text"
-        placeholder="캐릭터 닉네임을 입력하세요."
+        placeholder="닉네임을 입력하세요."
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         className={styles["search-input"]}

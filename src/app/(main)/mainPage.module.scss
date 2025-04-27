@@ -29,12 +29,12 @@
 
 .logo-wrapper {
   position: relative;
-  aspect-ratio: 640 / 161;
-  width: 15rem;
+  aspect-ratio: 888 / 131;
+  width: 25rem;
   margin-bottom: 1.2rem;
 
   @include bp.tablet {
-    width: 25rem;
+    width: 35rem;
     margin-bottom: 1.7rem;
   }
 }
