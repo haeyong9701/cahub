@@ -2,6 +2,7 @@ import { fetchOuid, fetchBasicInfo, fetchItemEquipment } from "@/app/_api";
 import ItemEquipment from "@/app/_components/ItemEquipment";
 import UserInfo from "@/app/_components/UserInfo";
 import styles from "./SearchPage.module.scss";
+import UserInfoNavbar from "@/app/_components/UserInfoNavbar";
 
 export default async function SearchPage({ params }: { params: { userName: string } }) {
   const { userName: raw } = await params;
@@ -13,6 +14,7 @@ export default async function SearchPage({ params }: { params: { userName: strin
   return (
     <div className={styles["search-page-container"]}>
       <UserInfo basicInfo={basicInfo} userName={userName} />
+      <UserInfoNavbar />
       <ItemEquipment itemEquipment={itemEquipment} />
     </div>
   );
