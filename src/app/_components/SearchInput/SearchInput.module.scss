@@ -14,7 +14,9 @@
     align-items: center;
 
     .search-input {
-      height: 3.6rem;
+      height: 3.2rem;
+      background-color: c.$Gray-1;
+      color: c.$Gray-10;
     }
   }
 }
