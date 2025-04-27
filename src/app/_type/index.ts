@@ -26,3 +26,7 @@ export interface LevelInfo {
   requiredExp: number;
   totalExp: number;
 }
+
+export interface GuildResponse {
+  guild_id: string;
+}

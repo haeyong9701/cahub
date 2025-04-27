@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BasicUserInfo, ItemEquipmentResponse } from "@/app/_type";
+import { BasicUserInfo, ItemEquipmentResponse, GuildResponse } from "@/app/_type";
 
 const API_URL = "https://open.api.nexon.com/ca/v1";
 
@@ -43,6 +43,19 @@ export const fetchBasicInfo = async (ouid: string): Promise<BasicUserInfo> => {
 // 장착 아이템 정보 조회 API
 export const fetchItemEquipment = async (ouid: string): Promise<ItemEquipmentResponse> => {
   const response = await axios.get(`${API_URL}/user/item-equipment`, {
+    headers: {
+      "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+    },
+    params: {
+      ouid,
+    },
+  });
+  return response.data;
+};
+
+// 길드 정보 조회 API
+export const fetchGuildInfo = async (ouid: string): Promise<GuildResponse> => {
+  const response = await axios.get(`${API_URL}/user/guild`, {
     headers: {
       "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
     },

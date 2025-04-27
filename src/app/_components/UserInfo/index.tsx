@@ -1,12 +1,20 @@
 "use client";
 
-import { BasicUserInfo } from "@/app/_type";
+import { BasicUserInfo, GuildResponse } from "@/app/_type";
 import Image from "next/image";
 import styles from "./UserInfo.module.scss";
 import { formatDateKoreanMinute, formatDateKoreanSecond } from "@/app/_utils/formatDateKorean";
 import { getNextLevelInfo } from "@/app/_utils/getNextLevelInfo";
 
-export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUserInfo; userName: string }) {
+export default function UserInfo({
+  basicInfo,
+  userName,
+  guild,
+}: {
+  basicInfo: BasicUserInfo;
+  userName: string;
+  guild: GuildResponse;
+}) {
   const lastLogin = formatDateKoreanSecond(basicInfo.user_date_last_login);
   const lastLogout = formatDateKoreanSecond(basicInfo.user_date_last_logout);
   const isOnline = lastLogin >= lastLogout;
@@ -54,7 +62,7 @@ export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUser
               <div className={styles["user-info-description"]}>
                 <div className={styles["user-info-guild"]}>
                   <dt>길드</dt>
-                  <dd>-------</dd>
+                  <dd>{guild.guild_id ?? ""}</dd>
                 </div>
 
                 <div className={styles["user-info-nickname"]}>
