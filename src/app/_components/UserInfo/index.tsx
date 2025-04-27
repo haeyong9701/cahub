@@ -3,12 +3,12 @@
 import { BasicUserInfo } from "@/app/_type";
 import Image from "next/image";
 import styles from "./UserInfo.module.scss";
-import { formatDate } from "@/app/_utils/formatDate";
+import { formatDateKoreanMinute, formatDateKoreanSecond } from "@/app/_utils/formatDateKorean";
 import { getNextLevelInfo } from "@/app/_utils/getNextLevelInfo";
 
 export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUserInfo; userName: string }) {
-  const lastLogin = formatDate(basicInfo.user_date_last_login);
-  const lastLogout = formatDate(basicInfo.user_date_last_logout);
+  const lastLogin = formatDateKoreanSecond(basicInfo.user_date_last_login);
+  const lastLogout = formatDateKoreanSecond(basicInfo.user_date_last_logout);
   const isOnline = lastLogin >= lastLogout;
 
   const { user_level, user_exp } = basicInfo;
@@ -65,17 +65,17 @@ export default function UserInfo({ basicInfo, userName }: { basicInfo: BasicUser
 
               <div className={styles["user-info-time-stamp"]}>
                 <dt>최근 로그인</dt>
-                <dd>{lastLogin}</dd>
+                <dd>{formatDateKoreanMinute(basicInfo.user_date_last_login)}</dd>
               </div>
 
               <div className={styles["user-info-time-stamp"]}>
                 <dt>최근 로그아웃</dt>
-                <dd>{isOnline ? "-" : lastLogout}</dd>
+                <dd>{isOnline ? "-" : formatDateKoreanMinute(basicInfo.user_date_last_logout)}</dd>
               </div>
 
               <div className={styles["user-info-time-stamp"]}>
                 <dt>캐릭터 생성일</dt>
-                <dd>{formatDate(basicInfo.user_date_create)}</dd>
+                <dd>{formatDateKoreanMinute(basicInfo.user_date_create)}</dd>
               </div>
             </dl>
           </div>
