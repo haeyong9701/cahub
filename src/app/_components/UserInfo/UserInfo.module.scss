@@ -206,18 +206,11 @@
 
 .exp-progress-ratio {
   position: absolute;
-  top: 2.1rem;
-  left: 38%;
   font-weight: 600;
   color: c.$Gray-1;
-
-  @include bp.tablet {
-    top: 2.2rem;
-  }
-
-  @include bp.desktop {
-    top: 2.9rem;
-  }
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .user-info-time-stamp {
