@@ -77,3 +77,22 @@
     color: c.$Gray-1;
   }
 }
+
+.no-item-equipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > p {
+    font-size: fs.$font-size-xs;
+    color: c.$Gray-1;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+    }
+
+    @include bp.desktop {
+      font-size: fs.$font-size-base;
+    }
+  }
+}

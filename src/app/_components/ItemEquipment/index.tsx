@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ItemEquipmentResponse } from "@/app/_type";
 import { ItemImage } from "../ItemImage";
 import styles from "./ItemEquipment.module.scss";
@@ -7,7 +8,7 @@ import styles from "./ItemEquipment.module.scss";
 export default function ItemEquipments({ itemEquipment }: { itemEquipment: ItemEquipmentResponse }) {
   return (
     <section className={styles["item-equipment-section"]}>
-      {itemEquipment && (
+      {itemEquipment.item_equipment.length ? (
         <div className={styles["item-equipment-wrapper"]}>
           {itemEquipment.item_equipment.map(({ item_equipment_slot_name, item_name }, index) => {
             if (!item_equipment_slot_name || item_equipment_slot_name === "(Unknown)") return null;
@@ -25,6 +26,11 @@ export default function ItemEquipments({ itemEquipment }: { itemEquipment: ItemE
               </div>
             );
           })}
+        </div>
+      ) : (
+        <div className={styles["no-item-equipment"]}>
+          <Image src="/images/alert.png" alt="아이템 정보 없음" width={200} height={200} />
+          <p>아이템 정보 없음</p>
         </div>
       )}
     </section>
