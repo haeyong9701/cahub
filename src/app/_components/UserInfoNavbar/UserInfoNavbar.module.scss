@@ -20,13 +20,17 @@
 
 .navbar-content {
   background-color: c.$Gray-7;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
 
   > p {
-    font-size: fs.$font-size-sm;
+    font-size: fs.$font-size-xs;
     color: c.$Gray-1;
     font-weight: 600;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+    }
   }
 }

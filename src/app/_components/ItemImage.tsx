@@ -11,5 +11,9 @@ export function ItemImage({ itemName }: { itemName: string }) {
   if (isError) return <p style={{ color: "red" }}>이미지 로딩 실패</p>;
   if (!data || data.length === 0) return <p>아이템 이미지 없음</p>;
 
-  return <Image src={data[0].item_src} alt={itemName} width={60} height={60} style={{ objectFit: "contain" }} />;
+  const src = data[0].item_src;
+  const isGif = /\.gif($|\?)/i.test(src);
+  const size = isGif ? 120 : 80;
+
+  return <Image src={data[0].item_src} alt={itemName} width={size} height={size} style={{ objectFit: "contain" }} />;
 }
