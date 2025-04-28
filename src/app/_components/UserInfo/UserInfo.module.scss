@@ -180,17 +180,17 @@
 }
 
 .exp-progress-bar {
-  width: 14rem;
+  width: 16rem;
   height: 1.5rem;
   appearance: none;
 
   @include bp.tablet {
-    width: 16rem;
+    width: 19rem;
     height: 1.7rem;
   }
 
   @include bp.desktop {
-    width: 18rem;
+    width: 22rem;
     height: 2rem;
   }
 
