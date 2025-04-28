@@ -8,10 +8,24 @@
   max-width: 50em;
   padding: 0 2.5rem;
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: c.$Gray-1;
+    /* 배경 색상 */
+    -webkit-box-shadow: 0 0 0 10rem c.$Background-1 inset;
+  }
+
   &.SearchNavbar {
     max-width: 102.4rem;
     display: flex;
     align-items: center;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      -webkit-text-fill-color: c.$Gray-10;
+      /* 배경 색상 */
+      -webkit-box-shadow: 0 0 0 10rem c.$Gray-1 inset;
+    }
 
     .search-input {
       height: 3.2rem;
