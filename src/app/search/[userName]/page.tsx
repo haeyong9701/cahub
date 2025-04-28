@@ -4,12 +4,18 @@ import UserInfo from "@/app/_components/UserInfo";
 import styles from "./SearchPage.module.scss";
 import UserInfoNavbar from "@/app/_components/UserInfoNavbar";
 import SearchNavbar from "@/app/_components/SearchNavbar";
+import { notFound } from "next/navigation";
 
 export default async function SearchPage({ params }: { params: { userName: string } }) {
   const { userName: raw } = await params;
   const userName = decodeURIComponent(raw);
 
   const ouid = await fetchOuid(userName);
+
+  if (!ouid) {
+    notFound();
+  }
+
   const [basicInfo, itemEquipment, guild] = await Promise.all([
     fetchBasicInfo(ouid),
     fetchItemEquipment(ouid),
