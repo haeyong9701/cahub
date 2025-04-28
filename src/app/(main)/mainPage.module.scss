@@ -48,4 +48,11 @@
     font-size: fs.$font-size-sm;
     font-weight: 500;
   }
+
+  @include bp.desktop {
+    font-size: fs.$font-size-base;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
+  }
 }
