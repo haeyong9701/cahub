@@ -30,3 +30,7 @@ export interface LevelInfo {
 export interface GuildResponse {
   guild_id: string;
 }
+
+export interface ParamsProps {
+  params: { userName: string };
+}
