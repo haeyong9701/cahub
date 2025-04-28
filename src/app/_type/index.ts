@@ -32,5 +32,5 @@ export interface GuildResponse {
 }
 
 export interface ParamsProps {
-  params: { userName: string };
+  params: Promise<{ userName: string }>;
 }

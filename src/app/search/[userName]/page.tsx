@@ -9,7 +9,8 @@ import { Metadata } from "next";
 import { ParamsProps } from "@/app/_type";
 
 export async function generateMetadata({ params }: ParamsProps): Promise<Metadata> {
-  const userName = decodeURIComponent(params.userName);
+  const { userName: raw } = await params;
+  const userName = decodeURIComponent(raw);
   const ouid = await fetchOuid(userName);
 
   if (!ouid) {
@@ -26,7 +27,8 @@ export async function generateMetadata({ params }: ParamsProps): Promise<Metadat
 }
 
 export default async function SearchPage({ params }: ParamsProps) {
-  const userName = decodeURIComponent(params.userName);
+  const { userName: raw } = await params;
+  const userName = decodeURIComponent(raw);
   const ouid = await fetchOuid(userName);
 
   if (!ouid) {
