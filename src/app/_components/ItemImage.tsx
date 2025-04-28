@@ -27,15 +27,5 @@ export function ItemImage({ itemName }: { itemName: string }) {
   const isGif = /\.gif($|\?)/i.test(src);
   const size = isGif ? 120 : 80;
 
-  return (
-    <Image
-      src={src}
-      alt={itemName}
-      width={size}
-      height={size}
-      style={{ objectFit: "contain" }}
-      // GIF일 때만 최적화 끄기
-      unoptimized={isGif}
-    />
-  );
+  return <Image src={src} alt={itemName} width={size} height={size} style={{ objectFit: "contain" }} unoptimized />;
 }
