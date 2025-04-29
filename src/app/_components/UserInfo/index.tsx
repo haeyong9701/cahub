@@ -62,12 +62,12 @@ export default function UserInfo({
               <div className={styles["user-info-description"]}>
                 <div className={styles["user-info-guild"]}>
                   <dt>길드</dt>
-                  <dd>{guild.guild_id ?? ""}</dd>
+                  <dd>{guild.guild_id ?? "-"}</dd>
                 </div>
 
                 <div className={styles["user-info-nickname"]}>
                   <dt>닉네임</dt>
-                  <dd>{basicInfo.user_name ?? ""}</dd>
+                  <dd>{basicInfo.user_name ?? "-"}</dd>
                 </div>
               </div>
 
