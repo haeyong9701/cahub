@@ -4,6 +4,8 @@ import QueryProvider from "@/app/_components/QueryProvider";
 import "@/app/_styles/globals.scss";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "./_components/Footer";
+import Script from "next/script";
+import GoogleAnalytics from "./_components/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,9 +21,30 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <html lang="ko">
+      <head>
+        {/* 1) GA 라이브러리 로드 */}
+        {GA_ID && <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />}
+        {/* 2) gtag 초기화 */}
+        {GA_ID && (
+          <Script id="ga-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}', {
+                page_path: window.location.pathname,
+              });
+            `}
+          </Script>
+        )}
+      </head>
+
       <body className={`${geistSans.variable} `}>
+        <GoogleAnalytics />
         <QueryProvider>
           <Navbar />
           {children}
