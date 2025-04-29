@@ -21,15 +21,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const isProduction = process.env.NODE_ENV === "production";
   const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
     <html lang="ko">
       <head>
         {/* 1) GA 라이브러리 로드 */}
-        {GA_ID && <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />}
+        {isProduction && GA_ID && (
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        )}
         {/* 2) gtag 초기화 */}
-        {GA_ID && (
+        {isProduction && GA_ID && (
           <Script id="ga-init" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
