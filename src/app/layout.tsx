@@ -6,6 +6,7 @@ import Navbar from "@/app/_components/Navbar";
 import Footer from "./_components/Footer";
 import Script from "next/script";
 import GoogleAnalytics from "./_components/GoogleAnalytics";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cahub.xyz"),
   title: "크아허브: 크아 유저 정보 조회",
   description: "크레이지 아케이드 유저 정보 조회 서비스입니다. 레벨, 경험치, 장착 아이템 등을 한눈에 조회합니다.",
   openGraph: {
@@ -47,7 +49,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className={`${geistSans.variable} `}>
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
+
         <QueryProvider>
           <Navbar />
           {children}
