@@ -21,14 +21,22 @@ export default function UserInfo({
 
   const { user_level, user_exp } = basicInfo;
   const next = getNextLevelInfo(user_level);
+  const expProgresRatio = next
+    ? (((user_exp - (next.totalExp - next.requiredExp)) / next.requiredExp) * 100).toFixed(1)
+    : "100";
   const nextTotalExp = next ? next.totalExp : user_exp;
-  const expProgresRatio = ((user_exp / nextTotalExp) * 100).toFixed(1);
 
   return (
     <div className={styles["user-info-wrapper"]}>
       <section className={styles["user-info-container"]}>
         <div className={styles["image-wrapper"]}>
-          <Image src="/images/ethi.png" alt="userinfo background" fill sizes="20rem" />
+          <Image
+            src="/images/ethi.png"
+            alt="userinfo background"
+            fill
+            sizes="(min-width: 768px) 170px, 150px"
+            priority
+          />
         </div>
 
         {basicInfo && (
@@ -51,7 +59,7 @@ export default function UserInfo({
 
                 <div className={styles["user-info-exp"]}>
                   <dt>경험치</dt>
-                  <progress className={styles["exp-progress-bar"]} max={nextTotalExp} value={user_exp} />
+                  <progress className={styles["exp-progress-bar"]} max={100} value={expProgresRatio} />
                   <dd className={styles["exp-progress-ratio"]}>{expProgresRatio}%</dd>
                   <dd className={styles["exp"]}>
                     {user_exp.toLocaleString()} / {nextTotalExp.toLocaleString()}

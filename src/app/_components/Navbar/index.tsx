@@ -9,7 +9,7 @@ export default function Navbar() {
     <header className={styles["header"]}>
       <Link href="/" className={styles["header-link"]}>
         <div className={styles["logo-wrapper"]}>
-          <Image src="/images/logo.png" alt="CAHUB.XYZ" fill sizes="12rem" />
+          <Image src="/images/logo.png" alt="CAHUB.XYZ" fill sizes="120px" />
         </div>
       </Link>
     </header>
