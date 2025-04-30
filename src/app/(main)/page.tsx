@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./MainPage.module.scss";
-import SearchInput from "../_components/SearchInput";
+import SearchInput from "@/components/SearchInput/SearchInput";
 
 export default function MainPage() {
   return (

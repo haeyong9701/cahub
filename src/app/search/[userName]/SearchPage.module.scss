@@ -1,4 +1,6 @@
-@use "../../_styles/colors" as c;
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
 
 .search-page-container {
   display: flex;

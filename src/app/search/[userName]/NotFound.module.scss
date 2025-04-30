@@ -1,6 +1,6 @@
-@use "@/app/_styles/font-size" as fs;
-@use "@/app/_styles/colors" as c;
-@use "@/app/_styles/media-breakpoint" as bp;
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
 
 .not-found-wrapper {
   position: relative;

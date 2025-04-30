@@ -2,8 +2,8 @@
 
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import SearchNavbar from "@/components/SearchNavbar/SearchNavbar";
 import styles from "./NotFound.module.scss";
-import SearchNavbar from "@/app/_components/SearchNavbar";
 
 export default function NotFound() {
   const { userName: raw } = useParams();

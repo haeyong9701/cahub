@@ -1,0 +1,18 @@
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
+
+.search-button {
+  position: absolute;
+  top: 50%;
+  right: 4rem;
+  transform: translate(0, -45%);
+  border: none;
+  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+}
+
+.search-icon-wrapper {
+  cursor: pointer;
+}

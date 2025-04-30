@@ -1,12 +1,12 @@
-import { fetchOuid, fetchBasicInfo, fetchItemEquipment, fetchGuildInfo } from "@/app/_api";
-import ItemEquipment from "@/app/_components/ItemEquipment";
-import UserInfo from "@/app/_components/UserInfo";
-import styles from "./SearchPage.module.scss";
-import UserInfoNavbar from "@/app/_components/UserInfoNavbar";
-import SearchNavbar from "@/app/_components/SearchNavbar";
+import { fetchOuid, fetchBasicInfo, fetchItemEquipment, fetchGuildInfo } from "@/services/nexonApi";
+import ItemEquipment from "@/components/ItemEquipment/ItemEquipment";
+import UserInfo from "@/components/UserInfo/UserInfo";
+import UserInfoNavbar from "@/components/UserInfoNavbar/UserInfoNavbar";
+import SearchNavbar from "@/components/SearchNavbar/SearchNavbar";
+import { ParamsProps } from "@/types/params";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { ParamsProps } from "@/app/_type";
+import styles from "./SearchPage.module.scss";
 
 export async function generateMetadata({ params }: ParamsProps): Promise<Metadata> {
   const { userName: raw } = await params;

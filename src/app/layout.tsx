@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import QueryProvider from "@/app/_components/QueryProvider";
-import "@/app/_styles/globals.scss";
-import Navbar from "@/app/_components/Navbar";
-import Footer from "./_components/Footer";
+import type { Metadata } from "next";
 import Script from "next/script";
-import GoogleAnalytics from "./_components/GoogleAnalytics";
 import { Suspense } from "react";
+import "@/styles/globals.scss";
+import QueryProvider from "@/components/QueryProvider";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

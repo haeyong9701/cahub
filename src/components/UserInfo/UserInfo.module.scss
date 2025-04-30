@@ -1,0 +1,231 @@
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
+
+.user-info-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: c.$Background-2;
+}
+
+.user-info-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 102.4rem;
+  height: 30rem;
+  background-color: c.$Background-2;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+
+  @include bp.tablet {
+    height: 35rem;
+  }
+
+  @include bp.desktop {
+    height: 38rem;
+  }
+}
+
+.image-wrapper {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  transform: translate(0%, 10%);
+  width: 15rem;
+  aspect-ratio: 3 / 5;
+  opacity: 0.1;
+  z-index: -1;
+
+  @include bp.tablet {
+    width: 17rem;
+    opacity: 0.9;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 340%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.5) 0%, rgba(255, 255, 200, 0.1) 30%, transparent 60%);
+    z-index: -2;
+  }
+}
+
+.user-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 15%;
+
+  @include bp.desktop {
+    padding: 0 9rem;
+    gap: 1.5rem;
+  }
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    color: c.$Gray-1;
+    font-size: fs.$font-size-xs;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+    }
+
+    @include bp.desktop {
+      font-size: fs.$font-size-base;
+    }
+  }
+
+  dt {
+    color: c.$Gray-4;
+  }
+}
+
+.user-info-name-and-status {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-info-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 8rem;
+  height: 2.4rem;
+  border-radius: 2rem;
+  background-color: rgba(c.$Gray-1, 0.1);
+
+  @include bp.tablet {
+    width: 9rem;
+    height: 2.6rem;
+  }
+
+  > .online-text,
+  > .offline-text {
+    font-size: fs.$font-size-xs;
+    padding-top: 0.1rem;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+      padding-top: 0.2rem;
+    }
+  }
+
+  > .online-text {
+    color: c.$Green-1;
+  }
+  > .offline-text {
+    color: c.$Gray-5;
+  }
+}
+
+.status-circle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  &.online {
+    background-color: c.$Green-1;
+  }
+  &.offline {
+    background-color: c.$Gray-5;
+  }
+}
+
+.user-name {
+  font-size: fs.$font-size-lg;
+  color: c.$Gray-1;
+
+  @include bp.tablet {
+    font-size: fs.$font-size-xl;
+  }
+}
+
+.user-info-description {
+  display: grid;
+  grid-template-columns: 8rem auto;
+
+  @include bp.tablet {
+    grid-template-columns: 9rem auto;
+  }
+
+  @include bp.desktop {
+    grid-template-columns: 12rem auto;
+  }
+}
+
+.user-info-description > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include bp.desktop {
+    gap: 0.8rem;
+  }
+}
+
+.user-info-exp {
+  position: relative;
+}
+
+.exp-progress-bar {
+  width: 16rem;
+  height: 1.5rem;
+  appearance: none;
+
+  @include bp.tablet {
+    width: 19rem;
+    height: 1.7rem;
+  }
+
+  @include bp.desktop {
+    width: 22rem;
+    height: 2rem;
+  }
+
+  &::-webkit-progress-bar {
+    background: c.$Gray-6;
+    border-radius: 0.25rem;
+  }
+  &::-webkit-progress-value {
+    background: c.$Green-1;
+    border-radius: 0.25rem;
+  }
+}
+
+.exp-progress-ratio {
+  position: absolute;
+  font-weight: 500;
+  color: c.$Gray-1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-info-time-stamp {
+  display: flex;
+  gap: 1rem;
+
+  & > dt {
+    width: 7rem;
+
+    @include bp.tablet {
+      width: 8rem;
+    }
+
+    @include bp.desktop {
+      width: 11rem;
+    }
+  }
+}

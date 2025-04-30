@@ -1,0 +1,98 @@
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
+
+.item-equipment-section {
+  width: 100%;
+  max-width: 102.4rem;
+  display: flex;
+  justify-content: center;
+  background-color: c.$Background-1;
+}
+
+.item-equipment-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+
+  @include bp.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.item-equipment-container {
+  display: flex;
+  align-items: center;
+  background-color: c.$Background-2;
+  border-radius: 0.5rem;
+  height: 9rem;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    width: 0.7rem;
+    height: 100%;
+    background-color: c.$Blue-3;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+  }
+}
+
+.item-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 1.5rem;
+  width: 8.4rem;
+  height: 8.4rem;
+  border-radius: 0.7rem;
+  overflow: hidden;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  > p {
+    font-size: fs.$font-size-xs;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+    }
+
+    @include bp.desktop {
+      font-size: fs.$font-size-base;
+    }
+  }
+
+  > .item-slot-name {
+    color: c.$Gray-4;
+  }
+
+  > .item-name {
+    color: c.$Gray-1;
+  }
+}
+
+.no-item-equipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > p {
+    font-size: fs.$font-size-xs;
+    color: c.$Gray-1;
+
+    @include bp.tablet {
+      font-size: fs.$font-size-sm;
+    }
+
+    @include bp.desktop {
+      font-size: fs.$font-size-base;
+    }
+  }
+}

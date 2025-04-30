@@ -1,6 +1,6 @@
-@use "../_styles/font-size" as fs;
-@use "../_styles/colors" as c;
-@use "../_styles/media-breakpoint" as bp;
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
 
 .main-page-container {
   display: flex;

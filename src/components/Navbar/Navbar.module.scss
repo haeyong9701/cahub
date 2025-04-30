@@ -1,0 +1,23 @@
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
+
+.header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding: 1.4rem;
+  background-color: c.$Background-1;
+}
+
+.header-link {
+  display: flex;
+  align-items: end;
+  width: 12rem;
+}
+
+.logo-wrapper {
+  position: relative;
+  aspect-ratio: 888 / 131;
+  width: 12rem;
+}
