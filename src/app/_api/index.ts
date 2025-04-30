@@ -1,7 +1,8 @@
 import axios from "axios";
 import { BasicUserInfo, ItemEquipmentResponse, GuildResponse } from "@/app/_type";
 
-const API_URL = "https://open.api.nexon.com/ca/v1";
+const API_URL = process.env.NEXT_PUBLIC_NEXON_CA_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_NEXON_CA_API_KEY;
 
 // ouid 조회 API
 const WORLD_NAME = "해피";
@@ -10,7 +11,7 @@ export const fetchOuid = async (userName: string): Promise<string | null> => {
   try {
     const response = await axios.get(`${API_URL}/id`, {
       headers: {
-        "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+        "x-nxopen-api-key": API_KEY,
       },
       params: {
         user_name: userName,
@@ -30,7 +31,7 @@ export const fetchOuid = async (userName: string): Promise<string | null> => {
 export const fetchBasicInfo = async (ouid: string): Promise<BasicUserInfo> => {
   const response = await axios.get(`${API_URL}/user/basic`, {
     headers: {
-      "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      "x-nxopen-api-key": API_KEY,
     },
     params: {
       ouid,
@@ -43,7 +44,7 @@ export const fetchBasicInfo = async (ouid: string): Promise<BasicUserInfo> => {
 export const fetchItemEquipment = async (ouid: string): Promise<ItemEquipmentResponse> => {
   const response = await axios.get(`${API_URL}/user/item-equipment`, {
     headers: {
-      "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      "x-nxopen-api-key": API_KEY,
     },
     params: {
       ouid,
@@ -56,7 +57,7 @@ export const fetchItemEquipment = async (ouid: string): Promise<ItemEquipmentRes
 export const fetchGuildInfo = async (ouid: string): Promise<GuildResponse> => {
   const response = await axios.get(`${API_URL}/user/guild`, {
     headers: {
-      "x-nxopen-api-key": process.env.NEXT_PUBLIC_NEXON_CA_API_KEY,
+      "x-nxopen-api-key": API_KEY,
     },
     params: {
       ouid,
