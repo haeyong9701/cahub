@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./UserInfo.module.scss";
 import { BasicUserInfo, GuildResponse } from "@/types/userInfo";
-import { formatDateKoreanMinute, getNextLevelInfo } from "@/utils/app";
+import { formatDateKoreanMinute, getNextLevelInfo, getUserStatusInfo, calculateExpRatio } from "@/utils/app";
 
 export default function UserInfo({
   basicInfo,
@@ -14,15 +14,12 @@ export default function UserInfo({
   userName: string;
   guild: GuildResponse;
 }) {
-  const lastLogin = new Date(basicInfo.user_date_last_login);
-  const lastLogout = new Date(basicInfo.user_date_last_logout);
-  const isOnline = lastLogin >= lastLogout;
+  const { isOnline } = getUserStatusInfo(basicInfo.user_date_last_login, basicInfo.user_date_last_logout);
 
   const { user_level, user_exp } = basicInfo;
   const next = getNextLevelInfo(user_level);
-  const expProgresRatio = next
-    ? (((user_exp - (next.totalExp - next.requiredExp)) / next.requiredExp) * 100).toFixed(1)
-    : "100";
+
+  const expProgresRatio = calculateExpRatio(user_exp, next);
   const nextTotalExp = next ? next.totalExp : user_exp;
 
   return (

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { ItemEquipmentResponse } from "@/types/item";
 import { ItemImage } from "@/components/ItemImage";

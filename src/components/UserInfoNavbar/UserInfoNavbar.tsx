@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./UserInfoNavbar.module.scss";
 
 export default function UserInfoNavbar() {

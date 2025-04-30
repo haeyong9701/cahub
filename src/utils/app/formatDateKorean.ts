@@ -6,6 +6,6 @@ const options: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
-export const formatDateKoreanMinute = function (date: Date): string {
+export const formatDateKoreanMinute = function (date: string): string {
   return new Date(date).toLocaleString("ko-KR", options);
 };

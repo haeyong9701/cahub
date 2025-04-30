@@ -1,5 +1,3 @@
-"use client";
-
 import SearchInput from "@/components/SearchInput/SearchInput";
 import inputStyles from "@/components/SearchInput/SearchInput.module.scss";
 import styles from "./SearchNavbar.module.scss";
