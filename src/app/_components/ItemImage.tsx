@@ -1,18 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useManifest } from "@/app/_query";
 import Spinner from "./Spinner";
+import { useGetItemImage } from "../queries/useGetItemImage";
 
-// ItemImage 컴포넌트: 각 아이템 이름당 한 번 훅 호출
 export function ItemImage({ itemName }: { itemName: string }) {
-  const { data, isPending, isError, isSuccess } = useManifest(itemName);
+  const { data, isPending, isError } = useGetItemImage(itemName);
 
   if (isPending) return <Spinner />;
 
-  if (isError) return <p style={{ color: "red" }}>이미지 로딩 실패</p>;
-
-  if (isSuccess && data.length === 0)
+  if (isError)
     return (
       <Image
         src="/images/no-image-placeholder.png"
@@ -23,9 +20,10 @@ export function ItemImage({ itemName }: { itemName: string }) {
       />
     );
 
-  const src = data[0].item_src;
-  const isGif = /\.gif($|\?)/i.test(src);
+  const { url: itemUrl, contentType } = data;
+
+  const isGif = contentType === "image/gif";
   const size = isGif ? 120 : 80;
 
-  return <Image src={src} alt={itemName} width={size} height={size} style={{ objectFit: "contain" }} unoptimized />;
+  return <Image src={itemUrl} alt={itemName} width={size} height={size} style={{ objectFit: "contain" }} unoptimized />;
 }
