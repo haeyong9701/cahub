@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const extensions = ["png", "gif"]; // 시도할 확장자 순서
 
   for (const ext of extensions) {
-    const imageUrl = `${process.env.NEXT_PUBLIC_STORAGE_BUCKET_URL}/${encodedName}.${ext}`;
+    const imageUrl = `${process.env.STORAGE_BUCKET_URL}/${encodedName}.${ext}`;
 
     try {
       const res = await fetch(imageUrl);

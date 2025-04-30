@@ -2,8 +2,8 @@ import axios from "axios";
 import { BasicUserInfo, GuildResponse } from "@/types/userInfo";
 import { ItemEquipmentResponse } from "@/types/item";
 
-const API_URL = process.env.NEXT_PUBLIC_NEXON_CA_API_URL;
-const API_KEY = process.env.NEXT_PUBLIC_NEXON_CA_API_KEY;
+const API_URL = process.env.NEXON_CA_API_URL;
+const API_KEY = process.env.NEXON_CA_API_KEY;
 
 // ouid 조회 API
 const WORLD_NAME = "해피";
