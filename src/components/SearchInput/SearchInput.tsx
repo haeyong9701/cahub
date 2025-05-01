@@ -1,17 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./SearchInput.module.scss";
 import SearchButton from "@/components/SearchButton/SearchButton";
 
 export default function SearchInput({ className }: { className?: string }) {
   const [userName, setUserName] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const pathname = usePathname();
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const decodedPathName = decodeURIComponent(pathname.split("/").pop() ?? "");
+
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!userName) return;
+
+    if (userName === decodedPathName) {
+      return;
+    }
+
+    setIsLoading(true);
+    setUserName("로딩 중...");
     router.push(`/search/${userName}`);
   };
 
@@ -27,7 +39,7 @@ export default function SearchInput({ className }: { className?: string }) {
         autoFocus
         spellCheck="false"
       />
-      <SearchButton />
+      <SearchButton isLoading={isLoading} />
     </form>
   );
 }

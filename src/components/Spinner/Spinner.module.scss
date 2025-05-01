@@ -14,6 +14,11 @@
 
   border-radius: 50%;
   animation: spin 0.9s infinite linear;
+
+  &.SearchButton {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
 
 @keyframes spin {
