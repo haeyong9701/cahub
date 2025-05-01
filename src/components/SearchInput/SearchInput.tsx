@@ -11,14 +11,15 @@ export default function SearchInput({ className }: { className?: string }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const decodedPathName = decodeURIComponent(pathname.split("/").pop() ?? "");
+  const currentPathName = decodeURIComponent(pathname.split("/").pop() ?? "");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!userName) return;
 
-    if (userName === decodedPathName) {
+    if (userName === currentPathName) {
+      router.push(`/search/${userName}`);
       return;
     }
 
