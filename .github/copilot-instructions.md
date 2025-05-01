@@ -14,15 +14,17 @@ const nextjsAppRouterBestPractices = [
 // Folder structure
 
 const folderStructure = `src/
-  api/
   components/
   queries/
+  services/
   styles/
   types/
   utils/
   app/
     (main)/
+    api/
     search/
+    error.tsx
     layout.tsx
 public/`;
 
