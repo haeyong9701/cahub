@@ -26,5 +26,6 @@ export function useGetItemImage(itemName: string) {
     },
     staleTime: 3 * MINUTE,
     gcTime: 10 * MINUTE,
+    retry: 1,
   });
 }
