@@ -1,6 +1,6 @@
-import styles from "./Spinner.module.scss";
+import styles from "./LoadingSpinner.module.scss";
 
-export default function Spinner({ className }: { className?: string }) {
+export default function LoadingSpinner({ className }: { className?: string }) {
   const spinnerClassName = className ? `${styles["spinner"]} ${className}` : styles["spinner"];
   return <div className={spinnerClassName}></div>;
 }

@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Spinner from "@/components/Spinner/Spinner";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useGetItemImage } from "@/queries/useGetItemImage";
 
 export function ItemImage({ itemName }: { itemName: string }) {
   const { data, isPending, isError } = useGetItemImage(itemName);
 
-  if (isPending) return <Spinner />;
+  if (isPending) return <LoadingSpinner />;
 
   if (isError)
     return (
