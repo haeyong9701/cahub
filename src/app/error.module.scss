@@ -1,0 +1,54 @@
+@use "@/styles/_font-size" as fs;
+@use "@/styles/_colors" as c;
+@use "@/styles/_breakpoint" as bp;
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 5rem);
+  text-align: center;
+  background-color: c.$Background-1;
+  color: c.$Gray-1;
+  font-size: fs.$font-size-xs;
+  gap: 2rem;
+
+  @include bp.tablet {
+    font-size: fs.$font-size-sm;
+  }
+
+  @include bp.desktop {
+    font-size: fs.$font-size-base;
+  }
+}
+
+.error-title {
+  color: c.$Blue-3;
+  font-size: fs.$font-size-xl;
+  font-weight: 700;
+}
+
+.error-actions {
+  display: flex;
+  gap: 2rem;
+}
+
+.retry-button,
+.home-button {
+  border: none;
+  background-color: c.$Blue-3;
+  border-radius: 1.5rem;
+  color: c.$Gray-1;
+  font-size: fs.$font-size-xs;
+  font-weight: 700;
+  padding: 1rem;
+
+  @include bp.tablet {
+    font-size: fs.$font-size-sm;
+  }
+
+  @include bp.desktop {
+    font-size: fs.$font-size-base;
+  }
+}
