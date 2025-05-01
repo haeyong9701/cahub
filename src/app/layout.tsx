@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const isProduction = process.env.NODE_ENV === "production";
   const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const NEXON_APP_ID = process.env.NEXON_APP_ID;
 
   return (
     <html lang="ko">
@@ -45,6 +46,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               });
             `}
           </Script>
+        )}
+
+        {isProduction && NEXON_APP_ID && (
+          <Script
+            src={`https://openapi.nexon.com/analytics.js?app_id=${NEXON_APP_ID}`}
+            strategy="afterInteractive"
+            async
+          />
         )}
       </head>
 
