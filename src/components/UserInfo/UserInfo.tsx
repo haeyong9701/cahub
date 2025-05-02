@@ -16,11 +16,13 @@ export default function UserInfo({
 }) {
   const { isOnline } = getUserStatusInfo(basicInfo.user_date_last_login, basicInfo.user_date_last_logout);
 
-  const { user_level, user_exp } = basicInfo;
+  // 레벨 1일 경우 경험치가 null로 오는 것을 처리
+  const userExp = basicInfo.user_exp ?? 0;
+  const { user_level } = basicInfo;
   const next = getNextLevelInfo(user_level);
 
-  const expProgresRatio = calculateExpRatio(user_exp, next);
-  const nextTotalExp = next ? next.totalExp : user_exp;
+  const expProgresRatio = calculateExpRatio(userExp, next);
+  const nextTotalExp = next ? next.totalExp : userExp;
 
   return (
     <div className={styles["user-info-wrapper"]}>
@@ -58,7 +60,7 @@ export default function UserInfo({
                   <progress className={styles["exp-progress-bar"]} max={100} value={expProgresRatio} />
                   <dd className={styles["exp-progress-ratio"]}>{expProgresRatio}%</dd>
                   <dd className={styles["exp"]}>
-                    {user_exp.toLocaleString()} / {nextTotalExp.toLocaleString()}
+                    {userExp.toLocaleString()} / {nextTotalExp.toLocaleString()}
                   </dd>
                 </div>
               </div>
