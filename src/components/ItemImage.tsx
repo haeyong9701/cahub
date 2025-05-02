@@ -1,29 +1,73 @@
 "use client";
 
 import Image from "next/image";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { useGetItemImage } from "@/queries/useGetItemImage";
+import { useEffect, useState } from "react";
+import * as Sentry from "@sentry/nextjs";
+
+const URI = process.env.NEXT_PUBLIC_STORAGE_BUCKET_URL;
+const DEFAULT_IMAGE = "/images/no-image-placeholder.png";
+const BLUR_DATA_URL =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDEzeBAADuQG5THZiiQAAAABJRU5ErkJggg==";
 
 export function ItemImage({ itemName }: { itemName: string }) {
-  const { data, isPending, isError } = useGetItemImage(itemName);
+  const [imageType, setImageType] = useState<"png" | "gif" | "default">("png");
 
-  if (isPending) return <LoadingSpinner />;
+  const normalizedName = itemName.normalize("NFD");
+  const encodedName = encodeURIComponent(normalizedName);
 
-  if (isError)
-    return (
-      <Image
-        src="/images/no-image-placeholder.png"
-        alt="아이템 이미지 없음"
-        width={65}
-        height={65}
-        style={{ objectFit: "contain" }}
-      />
-    );
+  const pngUrl = `${URI}${encodedName}.png`;
+  const gifUrl = `${URI}${encodedName}.gif`;
 
-  const { url: itemUrl, contentType } = data;
+  const size = imageType === "gif" ? 120 : 80;
 
-  const isGif = contentType === "image/gif";
-  const size = isGif ? 120 : 80;
+  useEffect(() => {
+    if (imageType === "default") {
+      Sentry.captureMessage(`이미지를 찾을 수 없음: ${itemName}`, {
+        level: "warning",
+        tags: {
+          component: "ItemImage",
+          itemName,
+        },
+        extra: {
+          pngUrl,
+          gifUrl,
+          normalizedName,
+          encodedName,
+        },
+      });
+    }
+  }, [imageType, itemName, pngUrl, gifUrl, normalizedName, encodedName]);
 
-  return <Image src={itemUrl} alt={itemName} width={size} height={size} style={{ objectFit: "contain" }} unoptimized />;
+  const getCurrentSrc = () => {
+    switch (imageType) {
+      case "png":
+        return pngUrl;
+      case "gif":
+        return gifUrl;
+      default:
+        return DEFAULT_IMAGE;
+    }
+  };
+
+  return (
+    <Image
+      src={getCurrentSrc()}
+      alt={itemName || "아이템 이미지"}
+      width={size}
+      height={size}
+      style={{ objectFit: "contain" }}
+      unoptimized
+      placeholder="blur"
+      blurDataURL={BLUR_DATA_URL}
+      onError={() => {
+        if (imageType === "png") {
+          // PNG가 실패하면 GIF로 전환, useState로 다시 리렌더링
+          setImageType("gif");
+        } else if (imageType === "gif") {
+          // GIF도 실패하면 기본 이미지로 전환
+          setImageType("default");
+        }
+      }}
+    />
+  );
 }
