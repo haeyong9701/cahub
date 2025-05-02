@@ -7,7 +7,6 @@ import { ParamsProps } from "@/types/params";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import styles from "./SearchPage.module.scss";
-import * as Sentry from "@sentry/nextjs";
 
 export async function generateMetadata({ params }: ParamsProps): Promise<Metadata> {
   const { userName: raw } = await params;
@@ -33,32 +32,8 @@ export default async function SearchPage({ params }: ParamsProps) {
   const ouid = await fetchOuid(userName);
 
   if (!ouid) {
-    Sentry.captureMessage(`검색 실패: ${userName}`, {
-      level: "info",
-      tags: {
-        feature: "user_search",
-        action: "search_not_found",
-      },
-      extra: {
-        userName,
-        timestamp: new Date().toISOString(),
-      },
-    });
-
     notFound();
   }
-
-  Sentry.captureMessage(`검색 성공: ${userName}`, {
-    level: "info",
-    tags: {
-      feature: "user_search",
-      action: "search_success",
-    },
-    extra: {
-      userName,
-      ouid,
-    },
-  });
 
   const [basicInfo, itemEquipment, guild] = await Promise.all([
     fetchBasicInfo(ouid),
