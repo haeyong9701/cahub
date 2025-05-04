@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [new URL("https://storage.googleapis.com/bucket-nexon-ca-project/items/**")],
+    remotePatterns: [new URL("https://cdn.cahub.xyz/**")],
   },
 };
 // Sentry config 옵션
