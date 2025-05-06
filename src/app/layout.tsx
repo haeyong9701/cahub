@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {isProduction && NEXON_APP_ID && (
           <Script
-            src={`https://openapi.nexon.com/analytics.js?app_id=${NEXON_APP_ID}`}
+            src={`https://openapi.nexon.com/js/analytics.js?app_id=${NEXON_APP_ID}`}
             strategy="afterInteractive"
             async
           />
