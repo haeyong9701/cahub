@@ -33,7 +33,7 @@
 - **Deploy**. Vercel
 
 ## Architecture
-![diagram](https://github.com/user-attachments/assets/e6711fa3-bcd3-49a0-8d4f-c267d1cf835f)
+![diagram](https://github.com/user-attachments/assets/d0528a32-964e-4e04-ac33-c2cb0464657b)
 
 ## Project Structure
 
