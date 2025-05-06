@@ -32,7 +32,10 @@
 - **Error Monitoring**. Sentry
 - **Deploy**. Vercel
 
-## 프로젝트 구조
+## Architecture
+![diagram](https://github.com/user-attachments/assets/e6711fa3-bcd3-49a0-8d4f-c267d1cf835f)
+
+## Project Structure
 
 ```text
 src
@@ -51,7 +54,7 @@ src
 └── utils                   # 유틸리티 함수
 ```
 
-## 주요 컴포넌트 및 기능
+## Key Components & Features
 
 ### 서버 컴포넌트
 
