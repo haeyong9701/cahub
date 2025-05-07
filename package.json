@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@google-cloud/storage": "^7.16.0",
     "@sentry/nextjs": "^9.15.0",
     "@tanstack/react-query": "^5.73.3",
     "@tanstack/react-query-devtools": "^5.74.3",

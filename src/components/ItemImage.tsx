@@ -12,11 +12,8 @@ const BLUR_DATA_URL =
 export function ItemImage({ itemName }: { itemName: string }) {
   const [imageType, setImageType] = useState<"png" | "gif" | "default">("png");
 
-  const normalizedName = itemName.normalize("NFD");
-  const encodedName = encodeURIComponent(normalizedName);
-
-  const pngUrl = `${URI}${encodedName}.png`;
-  const gifUrl = `${URI}${encodedName}.gif`;
+  const pngUrl = `${URI}${itemName}.png`;
+  const gifUrl = `${URI}${itemName}.gif`;
 
   const size = imageType === "gif" ? 120 : 80;
 
@@ -31,12 +28,11 @@ export function ItemImage({ itemName }: { itemName: string }) {
         extra: {
           pngUrl,
           gifUrl,
-          normalizedName,
-          encodedName,
+          itemName,
         },
       });
     }
-  }, [imageType, itemName, pngUrl, gifUrl, normalizedName, encodedName]);
+  }, [imageType, itemName, pngUrl, gifUrl]);
 
   const getCurrentSrc = () => {
     switch (imageType) {
