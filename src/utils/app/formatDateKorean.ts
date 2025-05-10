@@ -4,6 +4,7 @@ const options: Intl.DateTimeFormatOptions = {
   day: "numeric",
   hour: "2-digit",
   minute: "2-digit",
+  timeZone: "Asia/Seoul",
 };
 
 export const formatDateKoreanMinute = function (date: string): string {
