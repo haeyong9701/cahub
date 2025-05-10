@@ -11,11 +11,6 @@ const BLUR_DATA_URL =
 
 export function ItemImage({ itemName }: { itemName: string }) {
   const [imageType, setImageType] = useState<"png" | "gif" | "default">("png");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const pngUrl = `${URI}${itemName}.png`;
   const gifUrl = `${URI}${itemName}.gif`;
@@ -23,8 +18,6 @@ export function ItemImage({ itemName }: { itemName: string }) {
   const size = imageType === "gif" ? 120 : 80;
 
   useEffect(() => {
-    if (!isMounted) return;
-
     if (imageType === "default") {
       Sentry.captureMessage(`이미지를 찾을 수 없음: ${itemName}`, {
         level: "warning",
@@ -39,7 +32,7 @@ export function ItemImage({ itemName }: { itemName: string }) {
         },
       });
     }
-  }, [imageType, itemName, pngUrl, gifUrl, isMounted]);
+  }, [imageType, itemName, pngUrl, gifUrl]);
 
   const getCurrentSrc = () => {
     switch (imageType) {
@@ -53,37 +46,24 @@ export function ItemImage({ itemName }: { itemName: string }) {
   };
 
   return (
-    <div style={{ width: size, height: size }}>
-      {isMounted ? (
-        <Image
-          src={getCurrentSrc()}
-          alt={itemName || "아이템 이미지"}
-          width={size}
-          height={size}
-          style={{ objectFit: "contain" }}
-          unoptimized
-          placeholder="blur"
-          blurDataURL={BLUR_DATA_URL}
-          onError={() => {
-            if (imageType === "png") {
-              // PNG가 실패하면 GIF로 전환, useState로 다시 리렌더링
-              setImageType("gif");
-            } else if (imageType === "gif") {
-              // GIF도 실패하면 기본 이미지로 전환
-              setImageType("default");
-            }
-          }}
-        />
-      ) : (
-        <div
-          style={{
-            width: size,
-            height: size,
-            background: `url(${BLUR_DATA_URL})`,
-            backgroundSize: "cover",
-          }}
-        />
-      )}
-    </div>
+    <Image
+      src={getCurrentSrc()}
+      alt={itemName || "아이템 이미지"}
+      width={size}
+      height={size}
+      style={{ objectFit: "contain" }}
+      unoptimized
+      placeholder="blur"
+      blurDataURL={BLUR_DATA_URL}
+      onError={() => {
+        if (imageType === "png") {
+          // PNG가 실패하면 GIF로 전환, useState로 다시 리렌더링
+          setImageType("gif");
+        } else if (imageType === "gif") {
+          // GIF도 실패하면 기본 이미지로 전환
+          setImageType("default");
+        }
+      }}
+    />
   );
 }
