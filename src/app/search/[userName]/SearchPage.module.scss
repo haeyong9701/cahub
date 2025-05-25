@@ -9,3 +9,18 @@
   background-color: c.$Background-1;
   min-height: 100vh;
 }
+
+.item-equipment-notice {
+  font-size: fs.$font-size-xs;
+  color: c.$Gray-4;
+  line-height: 2;
+  padding: 1rem;
+
+  @include bp.tablet {
+    font-size: fs.$font-size-sm;
+  }
+
+  @include bp.desktop {
+    font-size: fs.$font-size-base;
+  }
+}
