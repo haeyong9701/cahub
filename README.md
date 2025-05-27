@@ -28,12 +28,12 @@
 - **FE**. Next.js 15 (App Router), React, TypeScript
 - **Styling**. SCSS
 - **Image Optimization**. Cloudflare R2, Next.js Image
-- **Analytics**. Google Analytics, Nexon Analytics
+- **Analytics**. Google Analytics
 - **Error Monitoring**. Sentry
 - **Deploy**. Vercel
 
 ## Architecture
-![diagram](https://github.com/user-attachments/assets/5d5f9494-1a92-4be4-bfbb-44fab12ebcac)
+![diagram](https://github.com/user-attachments/assets/42b03d00-6cb1-49e5-b5d9-408c54981fbb)
 
 ## Project Structure
 
