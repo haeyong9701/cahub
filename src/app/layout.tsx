@@ -20,9 +20,6 @@ export const metadata: Metadata = {
   openGraph: {
     images: "/images/social-main.png",
   },
-  other: {
-    "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
