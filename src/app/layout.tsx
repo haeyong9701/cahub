@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isProduction = process.env.NODE_ENV === "production";
   const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const NEXON_APP_ID = process.env.NEXT_PUBLIC_NEXON_APP_ID;
+  const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
   return (
     <html lang="ko">
@@ -55,6 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             async
           />
         )}
+
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
 
       <body className={`${geistSans.variable} `}>

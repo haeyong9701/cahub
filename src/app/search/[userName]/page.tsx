@@ -7,6 +7,7 @@ import { ParamsProps } from "@/types/params";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import styles from "./SearchPage.module.scss";
+import AdBanner from "@/components/AdBanner/AdBanner";
 
 export async function generateMetadata({ params }: ParamsProps): Promise<Metadata> {
   const { userName: raw } = await params;
@@ -47,6 +48,7 @@ export default async function SearchPage({ params }: ParamsProps) {
       <UserInfo basicInfo={basicInfo} userName={userName} guild={guild} />
       <UserInfoNavbar />
       <ItemEquipment itemEquipment={itemEquipment} />
+      <AdBanner slot="1310460046" />
     </div>
   );
 }

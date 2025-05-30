@@ -1,0 +1,23 @@
+@use "@/styles/_colors" as c;
+
+.ad-banner-container {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: c.$Background-1;
+  min-height: 280px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ad-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: c.$Gray-4;
+  background-color: c.$Gray-6;
+  z-index: 1;
+}
