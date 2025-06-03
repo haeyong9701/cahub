@@ -3,11 +3,11 @@ import ItemEquipment from "@/components/ItemEquipment/ItemEquipment";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import UserInfoNavbar from "@/components/UserInfoNavbar/UserInfoNavbar";
 import SearchNavbar from "@/components/SearchNavbar/SearchNavbar";
+import AdBanner from "@/components/AdBanner/AdBanner";
 import { ParamsProps } from "@/types/params";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import styles from "./SearchPage.module.scss";
-import AdBanner from "@/components/AdBanner/AdBanner";
 
 export async function generateMetadata({ params }: ParamsProps): Promise<Metadata> {
   const { userName: raw } = await params;
@@ -48,7 +48,11 @@ export default async function SearchPage({ params }: ParamsProps) {
       <UserInfo basicInfo={basicInfo} userName={userName} guild={guild} />
       <UserInfoNavbar />
       <ItemEquipment itemEquipment={itemEquipment} />
-      <AdBanner slot="1310460046" />
+      <div className={styles["ad-banner-container"]}>
+        <div className={styles["ad-banner"]}>
+          <AdBanner slot="1310460046" />
+        </div>
+      </div>
     </div>
   );
 }

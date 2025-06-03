@@ -56,3 +56,17 @@
     padding-bottom: 3rem;
   }
 }
+
+.ad-banner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 10rem;
+  margin: 3rem;
+  padding: 0 2rem;
+}
+
+.ad-banner {
+  width: 100%;
+  max-width: 102.4rem;
+}

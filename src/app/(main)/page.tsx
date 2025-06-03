@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./MainPage.module.scss";
 import SearchInput from "@/components/SearchInput/SearchInput";
+import AdBanner from "@/components/AdBanner/AdBanner";
 
 export default function MainPage() {
   return (
@@ -14,6 +15,12 @@ export default function MainPage() {
         </div>
         <SearchInput />
       </section>
+
+      <div className={styles["ad-banner-container"]}>
+        <div className={styles["ad-banner"]}>
+          <AdBanner slot="1310460046" />
+        </div>
+      </div>
     </div>
   );
 }
