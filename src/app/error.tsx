@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
-    Sentry.captureException(`에러 발생: ${error}`, {
+    Sentry.captureException(error, {
       level: "error",
     });
     console.error("에러 발생:", error);
