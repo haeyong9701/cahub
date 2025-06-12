@@ -10,12 +10,10 @@ const BLUR_DATA_URL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDEzeBAADuQG5THZiiQAAAABJRU5ErkJggg==";
 
 export function ItemImage({ itemName }: { itemName: string }) {
-  const [imageType, setImageType] = useState<"png" | "gif" | "default">("png");
+  const [imageType, setImageType] = useState<"png" | "default">("png");
 
   const pngUrl = `${URI}${itemName}.png`;
-  const gifUrl = `${URI}${itemName}.gif`;
-
-  const size = imageType === "gif" ? 120 : 80;
+  const size = 80;
 
   useEffect(() => {
     if (imageType === "default") {
@@ -27,19 +25,16 @@ export function ItemImage({ itemName }: { itemName: string }) {
         },
         extra: {
           pngUrl,
-          gifUrl,
           itemName,
         },
       });
     }
-  }, [imageType, itemName, pngUrl, gifUrl]);
+  }, [imageType, itemName, pngUrl]);
 
   const getCurrentSrc = () => {
     switch (imageType) {
       case "png":
         return pngUrl;
-      case "gif":
-        return gifUrl;
       default:
         return DEFAULT_IMAGE;
     }
@@ -57,10 +52,7 @@ export function ItemImage({ itemName }: { itemName: string }) {
       blurDataURL={BLUR_DATA_URL}
       onError={() => {
         if (imageType === "png") {
-          // PNG가 실패하면 GIF로 전환, useState로 다시 리렌더링
-          setImageType("gif");
-        } else if (imageType === "gif") {
-          // GIF도 실패하면 기본 이미지로 전환
+          // PNG가 실패 시 기본 이미지로 변환(useState로 다시 리렌더링)
           setImageType("default");
         }
       }}
