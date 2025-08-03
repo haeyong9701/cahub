@@ -33,6 +33,9 @@ export function ItemImage({ itemName }: { itemName: string }) {
 
   const getCurrentSrc = () => (imageType === "png" ? pngUrl : DEFAULT_IMAGE);
 
+  // PNG 로드 실패 시 기본 이미지로 변환 (useState로 다시 리렌더링)
+  const handleImageLoadError = () => setImageType("default");
+
   return (
     <Image
       src={getCurrentSrc()}
@@ -43,12 +46,7 @@ export function ItemImage({ itemName }: { itemName: string }) {
       unoptimized
       placeholder="blur"
       blurDataURL={BLUR_DATA_URL}
-      onError={() => {
-        if (imageType === "png") {
-          // PNG가 실패 시 기본 이미지로 변환(useState로 다시 리렌더링)
-          setImageType("default");
-        }
-      }}
+      onError={handleImageLoadError}
     />
   );
 }
