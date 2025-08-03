@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import * as Sentry from "@sentry/nextjs";
 
-const URI = process.env.NEXT_PUBLIC_STORAGE_BUCKET_URL;
+const URL = process.env.NEXT_PUBLIC_STORAGE_BUCKET_URL;
 const DEFAULT_IMAGE = "/images/no-image-placeholder.png";
 const BLUR_DATA_URL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDEzeBAADuQG5THZiiQAAAABJRU5ErkJggg==";
@@ -12,8 +12,8 @@ const BLUR_DATA_URL =
 export function ItemImage({ itemName }: { itemName: string }) {
   const [imageType, setImageType] = useState<"png" | "default">("png");
 
-  const pngUrl = `${URI}${itemName}.png`;
-  const size = 80;
+  const pngUrl = `${URL}${itemName}.png`;
+  const SIZE = 80;
 
   useEffect(() => {
     if (imageType === "default") {
@@ -31,21 +31,14 @@ export function ItemImage({ itemName }: { itemName: string }) {
     }
   }, [imageType, itemName, pngUrl]);
 
-  const getCurrentSrc = () => {
-    switch (imageType) {
-      case "png":
-        return pngUrl;
-      default:
-        return DEFAULT_IMAGE;
-    }
-  };
+  const getCurrentSrc = () => (imageType === "png" ? pngUrl : DEFAULT_IMAGE);
 
   return (
     <Image
       src={getCurrentSrc()}
-      alt={itemName || "아이템 이미지"}
-      width={size}
-      height={size}
+      alt={itemName ?? "아이템 이미지"}
+      width={SIZE}
+      height={SIZE}
       style={{ objectFit: "contain" }}
       unoptimized
       placeholder="blur"
